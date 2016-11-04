@@ -1,0 +1,157 @@
+apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion Integer.parseInt(project.COMPILE_SDK_VERSION)
+    buildToolsVersion project.ANDROID_BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        applicationId "com.androidarchitecture"
+        minSdkVersion Integer.parseInt(project.ANDROID_BUILD_MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(project.ANDROID_BUILD_TARGET_SDK_VERSION)
+        versionCode Integer.parseInt(project.VERSION_CODE)
+        versionName project.VERSION_NAME
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        jackOptions {
+            enabled true
+        }
+    }
+
+    buildTypes {
+        buildTypes.each { type ->
+            type.buildConfigField "String", "DB_NAME_ENCRYPTED", project.DB_NAME_ENCRYPTED
+            type.buildConfigField "String", "DB_NAME_DEV", project.DB_NAME_DEV
+            type.buildConfigField "String", "DB_PASSWORD", project.DB_PASSWORD
+            type.buildConfigField "String", "API_URL", project.API_URL
+            type.buildConfigField "String", "API_VERSION", project.API_VERSION
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+    lintOptions {
+        abortOnError false
+        ignoreWarnings true
+        disable 'InvalidPackage'
+    }
+}
+
+greendao {
+    // The current version of the database schema.
+    // If entity/database schema is changed, this value has to be increased.
+    schemaVersion Integer.parseInt(project.DB_SCHEMA_VERSION)
+    targetGenDir 'src/main/java'
+}
+
+dependencies {
+    def google_support_library_name = "com.android.support"
+    def google_support_library_version = "23.2.1"
+    def multidex_version = "1.0.1"
+    def butterknife_version = "8.4.0"
+    def retrofit2_library_name = "com.squareup.retrofit2"
+    def retrofit2_converter_gson_version = "2.0.2"
+    def retrofit2_version = "2.0.2"
+    def retrofit2_adapter_rxjava_version = "2.1.0"
+    def okhttp3_logging_interceptor_version = "3.3.1"
+    def gson_version = "2.6.2"
+    def play_services_version = "9.4.0"
+    def dagger_version = "2.6.1"
+    def rxjava_version = "1.1.10"
+    def rxandroid_version = "1.2.1"
+    def greendao_version = '3.2.0'
+    def greendao_encryption_version = '2.2.2'
+    def android_database_sqlcipher_version = '3.5.1'
+    def greendao_generator_encryption_version = '2.2.0'
+    def timber_version = "4.1.2"
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    // add this for intent mocking support
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    // add this for webview testing support
+    androidTestCompile('com.android.support.test.espresso:espresso-web:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    // Android runner and rules support
+    androidTestCompile('com.android.support.test:runner:0.5', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile('com.android.support.test:rules:0.5', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    testCompile 'junit:junit:4.12'
+
+    /**
+     * Google Dependencies
+     */
+    compile group: google_support_library_name, name: 'appcompat-v7', version: google_support_library_version
+    compile group: google_support_library_name, name: 'design', version: google_support_library_version
+    compile group: google_support_library_name, name: 'support-v4', version: google_support_library_version
+    compile group: google_support_library_name, name: 'recyclerview-v7', version: google_support_library_version
+    compile group: google_support_library_name, name: 'support-annotations', version: google_support_library_version
+    compile group: google_support_library_name, name: 'multidex', version: multidex_version
+    compile group: 'com.google.code.gson', name: 'gson', version: gson_version
+    compile group: 'com.google.android.gms', name: 'play-services', version: play_services_version
+    compile group: 'com.google.dagger', name: 'dagger', version: dagger_version
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.6.1'
+
+    /**
+     * Jakewharton Dependencies
+     */
+    compile group: 'com.jakewharton', name: 'butterknife', version: butterknife_version
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    compile group: 'com.jakewharton.timber', name: 'timber', version: timber_version
+
+    /**
+     * Square Dependencies
+     */
+    compile group: retrofit2_library_name, name: 'converter-gson', version: retrofit2_converter_gson_version
+    compile group: retrofit2_library_name, name: 'retrofit', version: retrofit2_version
+    compile group: retrofit2_library_name, name: 'adapter-rxjava', version: retrofit2_adapter_rxjava_version
+    compile group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okhttp3_logging_interceptor_version
+
+    /**
+     * Greenrobot dependencies
+     */
+    compile group: 'org.greenrobot', name: 'greendao', version: greendao_version
+    compile group: 'org.greenrobot', name: 'greendao-encryption', version: greendao_encryption_version
+    compile group: 'net.zetetic', name: 'android-database-sqlcipher', version: android_database_sqlcipher_version
+    compile group: 'org.greenrobot', name: 'greendao-generator-encryption', version: greendao_generator_encryption_version
+
+    /**
+     * Other dependencies
+     */
+    compile group: 'io.reactivex', name: 'rxjava', version: rxjava_version
+    compile group: 'io.reactivex', name: 'rxandroid', version: rxandroid_version
+}

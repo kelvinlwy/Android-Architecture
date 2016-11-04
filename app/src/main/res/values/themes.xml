@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Set AppCompat’s color theming attrs -->
+        <!-- colorPrimary is used for the default action bar background -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!-- colorPrimaryDark is used for the status bar/navigation bar -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--
+         colorAccent is used as the default value for colorControlActivated,
+         which is used to tint widgets
+        -->
+        <item name="colorAccent">@color/colorPrimary</item>
+        <!-- The color applied to framework switch thumbs in their normal state. (switch off) -->
+        <item name="colorSwitchThumbNormal">@color/colorPrimary</item>
+        <!-- colorControlActivated: The color applied to framework controls in their activated (ex. checked, switch on) state. -->
+        <item name="colorControlActivated">@color/colorControlActivated</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <!--<item name="android:colorForeground">@android:color/foreground_material_light</item>-->
+
+        <!-- The color applied to framework controls in their normal state. -->
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <!-- The color applied to framework control highlights (ex. ripples, list selectors). -->
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
+        <!-- The color applied to framework buttons in their normal state.</style> -->
+        <!-- <item name="colorButtonNormal"></item> -->
+        <item name="textColorError">@color/textColorError</item>
+    </style>
+
+    <style name="Theme.Architecture" parent="AppTheme"></style>
+
+    <!--Theme with transparent action bar-->
+    <style name="Theme.Architecture.Transparent" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBarOverlay">true</item>
+    </style>
+
+    <!--Theme with full screen-->
+    <style name="Theme.Architecture.FullScreen" parent="Theme.Architecture">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+</resources>
