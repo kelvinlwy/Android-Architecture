@@ -1,8 +1,8 @@
-##Android Architecture
-#####This is a sample app that is retrieving posts from a Fake Online REST API about my architecture approach
+## Android Architecture
+##### This is a sample app that is retrieving posts from a Fake Online REST API about my architecture approach
 ---
 
-####Project Requirements
+#### Project Requirements
 ---
 * JDK: Java SE Development Kit 1.8
 * SDK: Android SDK
@@ -11,7 +11,7 @@
 * Gradle Version: 2.14.1
 * Android Plugin: Android plugin 2.2.1
 
-####Structure in this project
+#### Structure in this project
 ---
 
 * Structure - MVP (Model-View-Presenter) 
@@ -21,7 +21,7 @@
 * Persistent storage - Greendao 3
 * Logger - Timber
  
-####Open-source libraries used
+#### Open-source libraries used
 ---
 * [JakeWharton/butterknife](https://github.com/JakeWharton/butterknife) - Field and method binding
 * [JakeWharton/timber](https://github.com/JakeWharton/timber) - Logger
@@ -32,11 +32,11 @@
 * [ReactiveX/RxAndroid](https://github.com/ReactiveX/RxAndroid)
 * [Dagger 2](https://google.github.io/dagger/)
 
-####Resources
+#### Resources
 ---
 * [Fake online REST API](https://jsonplaceholder.typicode.com)
 
-##License
+## License
 --------
 
     Copyright 2016 Kelvin Leung
